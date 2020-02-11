@@ -1,7 +1,7 @@
 <template>
   <div class="task-container" v-bind:class="{completed : task.done}">
     <div class="task-top">
-      <input type="checkbox"  v-model="task.done">
+      <input type="checkbox" @click="stopProp($event)" v-model="task.done">
       <h3>{{task.title}}</h3>
     </div>
     <div class="task-mid">
@@ -20,6 +20,11 @@ export default {
   data() {
     return {
       dateOptions: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+    }
+  },
+  methods: {
+    stopProp(e){
+      e.stopPropagation();
     }
   }
 }
