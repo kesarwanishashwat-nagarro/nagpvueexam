@@ -22,11 +22,14 @@
 </template>
 
 <script>
+import { ADD_TASK } from '../store/types/actions.type'
 export default {
   name: 'taskForm',
     data () {
     return {
+      /** add 7 days to current date */
       in_a_week  : new Date().setDate(new Date().getDate()+7),
+      /** default task object */
       task: {
         id: 0,
         title: '',
@@ -38,6 +41,7 @@ export default {
     }
   },
   methods: {
+    /** save task when from is filled with title */
     saveTask () {
       if(this.task && this.task.title){
         const taskList = this.$store.state.taskList;
@@ -51,7 +55,7 @@ export default {
         if(!this.task.deadline){
           this.task.deadline = new Date(this.in_a_week);
         }
-        this.$store.state.taskList.push(this.task);
+        this.$store.dispatch(ADD_TASK, this.task)
         this.task = {
           title: '',
           desc: '',

@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {
+  TASK_ADD,
+  SET_TASK
+} from './types/mutations.type'
 
+import { ADD_TASK,
+  SELECT_TASK 
+} from './types/actions.type'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -37,11 +44,23 @@ export default new Vuex.Store({
         notes: []
       }
     ],
-    selected : null
+    selected: null
   },
   mutations: {
+    [TASK_ADD](state, task) {
+      state.taskList.push(task)
+    },
+    [SET_TASK](state, task){
+      state.selected = task;
+    }
   },
   actions: {
+    [ADD_TASK]({ commit }, task) {
+      commit(TASK_ADD, task)
+    },
+    [SELECT_TASK]({ commit }, task) {
+      commit(SET_TASK, task)
+    }
   },
   modules: {
   }

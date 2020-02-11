@@ -15,15 +15,18 @@
 export default {
   name: 'taskitem',
     props: {
+    /** Input task to the component. */
     task: { type: Object, required: true },
   },
   data() {
     return {
+      /** long format date options */
       dateOptions: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     }
   },
   methods: {
     stopProp(e){
+      /** stop propagation on checkbox click */
       e.stopPropagation();
     }
   }

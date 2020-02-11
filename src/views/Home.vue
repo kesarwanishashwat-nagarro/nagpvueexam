@@ -24,6 +24,7 @@
 // @ is an alias to /src
 import taskitem from '@/components/taskitem.vue'
 import taskForm from '@/components/taskForm.vue'
+import { SELECT_TASK } from '../store/types/actions.type'
 export default {
   name: 'Home',
   components: {
@@ -31,13 +32,15 @@ export default {
     taskForm
   },
   computed: {
+    /** the the updated tasks list from store */
     tasksList() {
       return this.$store.state.taskList
     }
   },
   methods: {
+    /** On selection of single task. */
     onTaskSelect(task){
-      this.$store.state.selected = task;
+      this.$store.dispatch(SELECT_TASK, task)
         this.$router.push({
           name: 'task',
           params: {
@@ -45,9 +48,11 @@ export default {
           }
         })
     },
+    /** Sort the list of task based on completion status. */
     sortByStatus(){
       this.tasksList.sort((a,b) => b.done - a.done)
     },
+    /** sort the tasks based on deadline date */
     sortByDate() {
       this.tasksList.sort((a,b) =>  new Date(a.deadline) - new Date(b.deadline))
     }

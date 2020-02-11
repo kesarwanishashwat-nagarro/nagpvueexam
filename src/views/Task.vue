@@ -35,17 +35,17 @@
 <script>
 export default {
   computed: {
+    /** Get the selected task object. */
     task () {
       return this.$store.state.selected || 
       this.$store.state.taskList.filter((t) => t.id === this.$route.params.taskid)
-    },
-    // notes() {
-    //   return this.task.notes ? this.task.notes.sort((a,b) =>  new Date(a.created) - new Date(b.created)) : []
-    // }
+    }
   },
   data() {
     return {
+      /** Date options to show the long date format */
       dateOptions: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
+      /** To get the default note Object */
       note: {
         info: '',
         created: new Date()
@@ -53,6 +53,7 @@ export default {
     }
   },
   methods: {
+    /** Save the note in store */
     saveNote(){
       const currentTask = this.task;
       if(this.note.info){
